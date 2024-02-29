@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#">
+    <input type="text" placeholder="username" id="usn">
+    <input type="password" placeholder="password" id="psw">
+    <input type="email" placeholder="email" id="eml">
+    <button id="clk">Click</button>
+</form>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+     
+        const firebaseConfig = {
+          apiKey: "AIzaSyAyQXju8lZlL4K7qPtFvvN6A0fm1U7k3s4",
+          authDomain: "login-84cdf.firebaseapp.com",
+          databaseURL: "https://login-84cdf-default-rtdb.firebaseio.com",
+          projectId: "login-84cdf",
+          storageBucket: "login-84cdf.appspot.com",
+          messagingSenderId: "173675709572",
+          appId: "1:173675709572:web:04300e4b2ba6007c40eed1"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        import {getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        const db = getDatabase();
+
+        let usn = document.getElementById("usn");
+        let psw = document.getElementById("psw");
+        let eml = document.getElementById("eml");
+        let clk = document.getElementById("clk");
+
+
+        function addData(){
+            set(ref(db, "users/" + psw.value), {
+                user: usn.value,
+                psw: psw.value,
+                email: eml.value
+            })
+            .then(() => {
+                alert("Success!")
+            })
+            .catch((error) => {
+                alert("No Success!");
+                console.log(error);
+            })
+        }
+
+
+        clk.addEventListener("click", addData)
+      </script>
+
+
+ 
+</body>
+</html>
